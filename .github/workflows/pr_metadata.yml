@@ -1,0 +1,29 @@
+name: PR Metadata Checks
+
+on:
+  pull_request:
+    types:
+    - opened
+    - edited
+    - synchronize
+  push:
+    branches:
+    - gh-readonly-queue/main/**
+
+jobs:
+  semantic-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+    - name: semantic-pr-title
+      uses: copilotmoney/copilot-ios-actions@v1.1.1
+      with:
+        action_name: semantic-title-checker
+  pr-size-label:
+    runs-on: ubuntu-latest
+    steps:
+    - name: pr-size-label
+      uses: copilotmoney/copilot-ios-actions@v1.1.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        action_name: pr-size-labeler

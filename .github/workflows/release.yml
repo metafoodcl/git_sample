@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'branch, commit or tag to build (leave as is to build from HEAD)'
+        default: main
+        required: true
+      version:
+        description: 'Version (e.g. 1.2.3) or bump (none, patch, minor, major)'
+        default: none
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.inputs.ref }}
+    - name: Create and deploy release
+      run: |
+        echo "Creating release" && \
+        sleep 4 && \
+        echo "Release deployed"

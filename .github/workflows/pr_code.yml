@@ -1,0 +1,19 @@
+name: PR Code Checks
+
+on:
+  pull_request:
+    types:
+    - opened
+    - synchronize
+  push:
+    branches:
+    - gh-readonly-queue/main/**
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v3
+    - name: Run build
+      run: sleep 5
